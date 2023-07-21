@@ -1,18 +1,25 @@
 import './App.css';
-import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom'
-import { AppBar, Toolbar, IconButton, Typography, Container, Link as MuiLink, CssBaseline } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Container,
   Menu,
   MenuItem,
-} from "@mui/material";
-import { Menu as MenuIcon } from "@mui/icons-material"; // Importing the MenuIcon
+  Link as MuiLink,
+  CssBaseline
+} from '@mui/material';
 
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { RandomPokemon } from './pages/RandomPokemon';
 import { Home } from './pages/Home';
 import React, { useState } from "react";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const handleMenuToggle = () => {
     setMenuOpen((prev) => !prev);
   };
@@ -21,34 +28,45 @@ function App() {
     <div className="App">
       <CssBaseline />
       <Router>
-      <AppBar position="static">
-        <Toolbar >
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={handleMenuToggle}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h4" component="div" sx={{ flexGrow: 1 }} className="custom-toolbar">
-            Pokemon Site
-          </Typography>
-          {/* The navigation links */}
-          <Menu anchorEl={null} open={menuOpen} onClick={() => setMenuOpen(false)}>
-            <MenuItem onClick={() => setMenuOpen(false)}>
-              <MuiLink component={Link} to="/" color="inherit" underline="none" sx={{ mx: 2 }}>
-                Pokemon random
-              </MuiLink>
-            </MenuItem>
-            <MenuItem onClick={() => setMenuOpen(false)}>
-              <MuiLink component={Link} to="/home" color="inherit" underline="none">
-                Home
-              </MuiLink>
-            </MenuItem>
-          </Menu>
-        </Toolbar>
-      </AppBar>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={handleMenuToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+              Pokemon Site
+            </Typography>
+            <Menu
+              anchorEl={null}
+              open={menuOpen}
+              onClose={() => setMenuOpen(false)}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+            >
+              <MenuItem onClick={() => setMenuOpen(false)}>
+                <MuiLink component={Link} to="/" color="inherit" underline="none" >
+                  Pokemon random
+                </MuiLink>
+              </MenuItem>
+              <MenuItem onClick={() => setMenuOpen(false)}>
+                <MuiLink component={Link} to="/home" color="inherit" underline="none">
+                  Home
+                </MuiLink>
+              </MenuItem>
+            </Menu>
+          </Toolbar>
+        </AppBar>
         <Container sx={{ mt: 3 }}>
           <Routes>
             <Route path="/" element={<RandomPokemon />} />

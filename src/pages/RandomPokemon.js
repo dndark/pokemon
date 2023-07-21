@@ -17,6 +17,7 @@ export const RandomPokemon = () => {
         const pokemonID = getRndInteger(0, 386);
         const url = "https://pokeapi.co/api/v2/pokemon/" + pokemonID
         Axios.get(url).then((res)=>{
+            console.log("call this ?")
             setPokemon(prevState => ({
                 ...prevState,
                 url: url,
@@ -51,18 +52,18 @@ export const RandomPokemon = () => {
             <Button variant="contained" color="primary" onClick={fetchPokemon}>
             Choose a Pokemon
             </Button>
-        <h1>{capitalize(pokemon.name)}</h1>
-        <img src={pokemon.image} alt="new" />
-            <Box sx={{ mt: 3 }}>
-                <Button variant="contained" color="secondary" onClick={saveFavour}>
-                    Save this Pokemon to your list
-                </Button>
-            <Box sx={{ mt: 2 }}>
-                {favour.map((value) => (
-                <img key={value.ID} src={value.default_image} alt="new" />
-                ))}
+            <h1>{capitalize(pokemon.name)}</h1>
+            <img src={pokemon.image} alt="new" />
+                <Box sx={{ mt: 3 }}>
+                    <Button variant="contained" color="secondary" onClick={saveFavour}>
+                        Save this Pokemon to your list
+                    </Button>
+                <Box sx={{ mt: 2 }}>
+                    {favour.map((value) => (
+                    <img key={value.ID} src={value.default_image} alt="new" />
+                    ))}
+                </Box>
             </Box>
-        </Box>
       </div>
     )
 };
