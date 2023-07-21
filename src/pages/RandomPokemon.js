@@ -1,5 +1,6 @@
 import Axios from "axios"
 import { useEffect, useState } from "react";
+import { Button, Box } from "@mui/material";
 
 const getRndInteger = (min, max) => {
     return Math.floor(Math.random() * (max - min) ) + min;
@@ -47,14 +48,21 @@ export const RandomPokemon = () => {
     
     return ( 
         <div>
-            <button onClick={fetchPokemon}> Choice a pokemon</button>
-            <h1>{capitalize(pokemon.name)} </h1>
-            <img src={pokemon.image} alt="new"/>
-            <div>
-                <button onClick={saveFavour}>Save this Pokemon to your list</button>
-                {favour.map((value)=>(<img key={value.ID} src={value.default_image} alt="new"></img>))}
-                
-            </div>
-        </div>
+            <Button variant="contained" color="primary" onClick={fetchPokemon}>
+            Choose a Pokemon
+            </Button>
+        <h1>{capitalize(pokemon.name)}</h1>
+        <img src={pokemon.image} alt="new" />
+            <Box sx={{ mt: 3 }}>
+                <Button variant="contained" color="secondary" onClick={saveFavour}>
+                    Save this Pokemon to your list
+                </Button>
+            <Box sx={{ mt: 2 }}>
+                {favour.map((value) => (
+                <img key={value.ID} src={value.default_image} alt="new" />
+                ))}
+            </Box>
+        </Box>
+      </div>
     )
 };
